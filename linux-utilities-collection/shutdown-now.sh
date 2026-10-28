@@ -4,22 +4,28 @@
 # gnome-terminal -- /bin/bash -c "path_to_the_shutdown-now.sh_script"
 
 while true; do
-    echo do you want to shutdown this system?
+    echo shutdown menu
     echo ""
     echo ""
-    echo "[a] yes"
-    echo "[s] no"
+    echo "[a] shutdown"
+    echo "[s] restart"
+    echo "[d] cancel"
     echo -n "> "
-    read -n1 choice
+    IFS= read -n1 choice
     echo
 
     case "$choice" in
-        a|A) 
+        a|A|' ') 
 echo shutting down system...
 systemctl poweroff
 break 
 ;;  
-        s|S) break ;;     
+        s|S) 
+echo restarting system...
+systemctl reboot
+break 
+;; 
+        d|D) break ;;     
         *) 
 echo "invalid choice"
 continue 
